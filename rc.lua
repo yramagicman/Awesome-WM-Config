@@ -41,8 +41,8 @@ end
 beautiful.init("/home/jonathan/.config/awesome/themes/greyscale/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "terminator"
-editor = os.getenv("EDITOR") or "vim"
+terminal = "xterm"
+editor = "geany"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -226,16 +226,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Tab",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
-    awful.key({ modkey,           }, "j",
-        function ()
-            awful.client.focus.byidx( 1)
-            if client.focus then client.focus:raise() end
-        end),
-    awful.key({ modkey,           }, "k",
-        function ()
-            awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
-        end),
+    awful.key({ modkey,           }, "j", function () awful.client.focus.byidx( 1) if client.focus then client.focus:raise() end end),
+    awful.key({ modkey,           }, "k", function () awful.client.focus.byidx(-1) if client.focus then client.focus:raise() end end),
     awful.key({ modkey,           }, ";", function () mymainmenu:show() end),
 
     -- Layout manipulation
@@ -244,19 +236,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
-    --awful.key({ modkey,           }, "Tab",
-    --    function ()
-    --        awful.client.focus.history.previous()
-    --        if client.focus then
-    --            client.focus:raise()
-    --        end
-    --    end),
-    awful.key(
-           {},
-           "Print",
-           function()
-               awful.util.spawn("gnome-screenshot",false)
-       end),
+    awful.key( {}, "Print", function() awful.util.spawn("gnome-screenshot",false) end),
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
@@ -278,15 +258,9 @@ globalkeys = awful.util.table.join(
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
-                  mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
-                  awful.util.getdir("cache") .. "/history_eval")
-              end),
+    awful.key({ modkey }, "x", function () awful.prompt.run({ prompt = "Run Lua code: " }, mypromptbox[mouse.screen].widget, awful.util.eval, nil, awful.util.getdir("cache") .. "/history_eval") end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ "Control"}, "space", function() menubar.show() end)
 )
 
 clientkeys = awful.util.table.join(
@@ -296,17 +270,8 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end),
-    awful.key({ modkey,           }, "m",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c.maximized_vertical   = not c.maximized_vertical
-        end)
+    awful.key({ modkey,           }, "n", function (c) c.minimized = true end),
+    awful.key({ modkey,           }, "m", function (c) c.maximized_horizontal = not c.maximized_horizontal c.maximized_vertical   = not c.maximized_vertical end)
 )
 
 -- Bind all key numbers to tags.
@@ -454,7 +419,8 @@ end)
 -- }}}
 do cmds =
 {
-    "/home/jonathan/.autostart"
+    "/home/jonathan/.autostart",
+
 }
 for _,i in pairs(cmds) do
     awful.util.spawn(i)
