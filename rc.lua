@@ -41,7 +41,7 @@ end
 beautiful.init("/home/jonathan/.config/awesome/themes/greyscale/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "urxvt"
 editor = "geany"
 editor_cmd = terminal .. " -e " .. editor
 
