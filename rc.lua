@@ -134,6 +134,12 @@ mywibox = {}
 mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
+statusbar = awful.wibox({
+    position ="bottom",
+    ontop = false,
+    width = 1,
+    height = 16
+})
 mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 1, awful.tag.viewonly),
                     awful.button({ modkey }, 1, awful.client.movetotag),
