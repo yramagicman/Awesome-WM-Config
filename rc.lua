@@ -138,7 +138,7 @@ statusbar = awful.wibox({
     position ="bottom",
     ontop = false,
     width = 1,
-    height = 16
+    height = 23
 })
 mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 1, awful.tag.viewonly),
