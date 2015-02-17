@@ -255,7 +255,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift" }, "Return", function () awful.util.spawn(terminal .. " -e /bin/bash") end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
-    awful.key({ modkey,           }, "w", function () awful.util.spawn("chromium", false) end),
+    awful.key({ modkey,           }, "w", function () awful.util.spawn("firefox-developer", false) end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn("gvim", false) end),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
